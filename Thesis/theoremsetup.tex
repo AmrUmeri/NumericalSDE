@@ -1,0 +1,26 @@
+%% Theorem-like environments
+
+%% This can be changed according to language. You can comment out the ones you
+%% don't need.
+
+\numberwithin{equation}{chapter}
+
+%% English variants
+\theoremstyle{break}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{algorithm}[theorem]{Algorithm}
+
+%% Custom theorem style
+%% Proof environment with a small square as a "qed" symbol
+\theoremstyle{nonumberplain}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\square}}
+\newtheorem{proof}{Proof}
+%\newtheorem{beweis}{Beweis}
+\theoremstyle{plain}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{nonumberplain}
+\newtheorem{remark}[theorem]{Remark}

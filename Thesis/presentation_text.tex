@@ -1,0 +1,263 @@
+%% We use the memoir class because it offers a many easy to use features.
+\documentclass[10pt,a4paper,titlepage, openany]{memoir} %openright, twosided, slides
+
+
+\usepackage[OT1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[sc]{mathpazo}
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb,amsfonts,mathrsfs}
+\usepackage[amsmath,thmmarks]{ntheorem}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\input{extrapackages}
+\input{layoutsetup}
+\input{theoremsetup}
+\input{macrosetup}
+\usepackage[linkcolor=black,colorlinks=true,citecolor=black,filecolor=black]{hyperref}
+\usepackage{float}
+\begin{document}
+\textbf{Titlepage}\\
+Welcome everyone to the presentation of my bachelor thesis.\\
+My thesis is about SDE and how to construct numerical methods for the approximative solution.
+
+\textbf{Overview}\\
+I would like to give an overview of my thesis:\\
+My thesis includes 3 parts:\\
+\begin{enumerate}
+\item In the first part I discuss the theory of stochastic integration.\\
+This is a theory of integration w.r.t stochastic processes. This means the integrator is a stochastic process and also the function
+which we want to integrate is allowed to be a stochastic process. I will focus on the theory of It\^o.
+\item Then I use these stochastic integrals in order to define so-called SDE's.\\
+I will tell more in a moment.
+\item In the final part I construct methods in order to solve these equations numerically.\\
+These methods are based on stochastic integration theory.\\
+Then I also studied the convergence properties of these methods.
+\end{enumerate}
+
+\textbf{Introduction}\\
+A SDE is a differential equation which includes a random term.\\ 
+Often it is given in symbolical form\\
+Usually if you have an ODE, you are dividing over dt. But here you are not allowed to divide over dt, because the random term may be non-differentable. \\
+The mathematical interpretation of the equation is given in integral form. It is a sum of a Riemann-integral and a so-called stochastic integral. The second integral is the stochastic integral. And the randomness in the equation is included through this integral.\\
+This means that also the solution of such equations must include some randomness.
+
+\textbf{Introduction}\\
+The problems which arise are the following:
+\begin{enumerate}
+\item How to define such equations and especially how to define the stochastic integral.
+\item What are the solutions and how to get them analytically or numerically.
+\item What are the conditions for the existence or uniqueness of the solution.
+\end{enumerate}
+
+\newpage
+
+\textbf{Introduction}\\
+If the solution exists, it is a stochastic process.\\
+In the graphic you can see one possible realization of a stochastic process. I will define stochastic processes later.
+
+
+\textbf{Main goal}\\
+However often we cannot solve these equations analytically and then we would like to have numerical approximations of the solution.\\
+In my thesis I discussed so-called strong methods. These are methods which give an approximation of the sample paths of the solution.\\
+And then we would also like to compare different methods w.r.t their convergence speed. Some methods are faster than others. Here we need the concept of convergence order.\\
+In the graphic you can see possible approximations. For example in Blue you can see the Euler-method. This is a generalization of the Euler-method for ordinary differential equations. In red you can see the Milstein-method.
+
+
+
+\textbf{Terminology}\\
+Now I would like to introduce some concepts which we need to understand stochastic integration.
+\begin{enumerate}
+\item We have given a probability space.\\
+We define a stochastic process as a collection of random variables indexed by some set. Here we take the inverval [0,T] as the index set and you can understand this as some time-interval.\\
+I will also use the following notation.\\
+You can understand stochastic processes also like this:\\
+If you fix the time t, then you get a random variable.
+\end{enumerate}
+
+\textbf{Terminology}\\
+Also if you fix an omega in your event set, you can define the following mapping.\\
+We call these the realizations of a process.\\
+In the graphic you can see some possible realizations of a continuous stochastic process.
+
+
+\textbf{Terminology}\\
+Now I would like to present the Wiener process. The Wiener process is a stochastic process. It is important to us because in stochastic integration theory you are integrating w.r.t the Wiener process.\\
+The Wiener process starts at 0. It has normal-distributed increments and the increments are independent if you have disjoint intervals.\\
+At each time the Wiener process is a normal-distributed random variable.
+
+\textbf{Terminology}\\
+In the graphic you can see possible realizations of the Wiener process.\\
+Here I had to give a discretization of the Wiener process.
+
+\newpage
+
+\textbf{The first Stochastic integral}
+Now we will discuss a first example of a stochastic integral.\\
+Here we want to integrate the Wiener process w.r.t itself, and 2 is just a factor.\\
+Similar to Riemann-integration we start with giving a partition of [0,T].\\
+Then we give 2 possible approximations of the stochastic integral.
+\begin{enumerate}
+\item In the first approximation you take the Wiener process at the beginning of each interval.
+\item In the second approximation you take the Wiener process at the end of each interval.
+\end{enumerate}
+Then you take the sum.\\
+The question is then, what happens if n goes to infinity, this means what happens if your partition get finer and finer.\\
+And what kind of convergence do we have.\\
+
+\textbf{The first Stochastic integral}
+It is possible to show that a limit is taken in \(L_2\) (EXPLAIN) if n goes to infinity. But the limits are different.\\
+This is different to Riemann-Integration where you had that upper and lower sum approximation converge to the same limit.\\
+In stochastic integration theory it depends how you give the approximations.
+
+
+\textbf{Questions}
+The first definition is also known as It\^o stochastic integration. Recall that for a given partition we take the process at the left on each interval. In my thesis I focussed on this definition.\\
+
+Then the question is: for which stochastic processes can we define the It\^o stochastic integral?
+
+
+\textbf{Terminology}\\
+To answer this question I need to introduce some concepts:
+\begin{enumerate}
+\item The first one is filtration.\\
+Each random variable generates a sigma-algebra.(EXPLAIN).\\
+This means a stochastic process is generating a sequence of sigma-algebras, which is also called filtration.\\
+Here we are interested in the filtration generated by the Wiener process.
+\item Then we will another process \(X_t\) to be adapted if it is measurable w.r.t filtration generated by the Wiener process.
+\end{enumerate}
+
+
+
+\textbf{Terminology}\\
+It is possible to see stochastic processes as elements in some space then it is possible to define a norm on this space. Here we define the \(L_2\)-norm for stochastic processes like this.\\
+Then I would like to define a class of stochastic processes C, with the following properties:
+\begin{enumerate}
+\item The process is measurable, this is already by definition
+\item The \(L_2\)-norm of the stochastic process is finite
+\item The stochastic process is adapted to the filtration generated by the Wiener process
+\end{enumerate}
+
+
+\textbf{Stochastic integration}\\
+It is possible to show the following result:\\
+For each stochastic process in our class of functions which we defined previously, the It\^o-stochastic integral exists as an element of \(L_2\)-Omega. This means it is a random variable and has finite variance.\\
+Here the difficulty is to show that the stochastic integral is measurable.\\
+
+The construction is done the following way:\\
+First we define the stochastic integral for so-called random step functions, there are stochastic processes which have step functions as sample paths.\\
+Then we can use these to approximate the stochastic integral for any stochastic process in the class C.\\
+Here we need to use that the class of random step functions is dense in C.
+
+\textbf{Stochastic integration}\\
+Now I would like to talk about an important result which holds only for It\^o stochastic integral.\\
+The It\^o-isometry tells you that the \(L_2\)-norm of your stochastic process is the same as the \(L_2\)-norm of the stochastic integral.\\
+This result is needed for the construction of It\^o stochastic integrals.
+
+
+\textbf{It\^o-lemma}\\
+The It\^o-lemma is the main result of stochastic integration theory.\\
+If you have a stochastic differential equation defined like this and you have a smooth map u.\\
+Then the question is: What kind of stochastic differential equation does the mapping \(u(X_t)\) solve?\\
+The lemma gives you an answer to this the following way:
+
+\textbf{It\^o-lemma}\\
+\(u(X_t)\) will look like this basically. This is also how you get the solution of stochastic differential equations. Sometimes you can choose the function u such that you get the solution \(X_t\) of the original stochastic differential equation. 
+we will see examples later.
+
+\newpage
+\textbf{Stochastic Differential Equation}\\
+Now let us consider again stochastic differential equations. It is possible to give conditions on the functions a and b such that the solution exists and is unique.\\
+Now I would like to give some examples of stochastic differential equations.
+
+\textbf{Geometric brownian motion}\\
+If we set \(a(x)\) equal to mu x and \(b(x)\) equal to sigma x, mu, sigma constants. Then we get the following SDE.\\
+It is possible to get the solution using the It\^o-lemma.\\
+The solution is also called geometric brownian motion. It is a continuous stochastic process such that at each time the process has a lognormal distribution.
+
+\textbf{Ornstein-Uhlenbeck process}\\
+The Ornstein-Uhlenbeck process is another example.\\
+Here \(a(x)\) is equal to -beta x and \(b(x)\) is equal to sigma , constant.\\
+Also here we can get the solution using the It\^o-lemma.
+
+\newpage
+
+\textbf{Stochastic Taylor expansions}\\
+Now I would like to discuss an important application of the It\^o-lemma, so-called stochastic taylor expansions.\\
+We consider again a SDE then we apply the It\^o-lemma on \(a(x)\) and \(b(x)\).\\
+
+\textbf{Stochastic Taylor expansions}\\
+This gives us the following expansions for \(a(x)\) and \(b(x)\).
+
+\textbf{Stochastic Taylor expansions}\\
+Then we plug these expansions into the original SDE. This gives us the following equation.\\
+Actually it gives you a very long expression but I summarized some terms into the variable R, this is the remainder term.\\
+This is also called the first stochastic taylor expansion.
+
+\textbf{Stochastic Taylor expansions}\\
+If you apply the It\^o-lemma a third time on one of the terms in R, then you get the following expansion, here we just recieved an additional term and R is again the remainder term\\
+This is also called the second stochastic taylor expansion.
+
+\textbf{Stochastic Taylor expansions}\\
+Now the idea of numerical algorithms for SDE's is just to give an expansion of the equation using the It\^o-lemma and then to remove terms which have a high order w.r.t to the \(L_2\)-norm, in our case we always will remove the remainder terms.
+
+
+\textbf{Euler-Method for SDE's}\\
+For example the Euler-method is based on the first stochastic taylor expansion. We give the expansion for n points \(t_0\cdots t_n\) and remove the remainder term.\\
+The algorithm is defined recursively.
+
+\textbf{Euler-Method for SDE's}\\
+The second stochastic taylor expansions leads to the Milstein-method, it is defined in the same way as the Euler-method.
+
+\newpage
+
+
+\textbf{Illustration}\\
+Now I would like to give an illustration of both methods.\\
+On the left you can see the Euler-Approximation in blue. The true solution is in black. And the coloread area is the difference between the true solution and the approximated solution.\\
+On the right you can see the same but here the approximation has beed done using the Milstein-method.\\
+
+Here we can see already that the Milstein-method is better in some sense than the Euler-Method.
+
+\textbf{Numerical Analysis}\\
+Now I would like to give a criterion in order to measure the approximation error.\\
+You can do this in different ways.\\
+A possibility is to take the difference between the approximation and the true solution at the final time T in the \(L_2\)-norm.
+
+\textbf{Numerical Analysis}\\
+Now we would like to know how fast our methods are converging. It is possible to give an error bound the following way\\
+Then the constant gamma determines the convergence speed of our methods. Thats why gamma is called the order of convergence.\\
+There are 2 ways to estimate gamma\\
+You can give an analytical error bound\\
+or you can estimate gamma using simulation.\\
+
+
+\textbf{Numerical Analysis}\\
+It is possible to show that the Euler-method has order of convergence 0.5\\
+and the Milstein-method has order of convergence 1.0\\
+This means that the Milstein-scheme converges faster.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

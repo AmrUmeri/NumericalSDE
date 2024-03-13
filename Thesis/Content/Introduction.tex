@@ -1,0 +1,31 @@
+\chapter{Introduction}
+
+Given the simplest first-order ordinary differential equation, where a: \(\mathbb{R}\to\mathbb{R}\) is continuous, we may want to find the solution \(X(t)\), if it exists:
+\[\frac{\mathrm{d}}{\mathrm{d}t}X(t) = a(X(t),t),\quad X(0) = x_0,\quad t\in [0,T],\]
+we then have the equivalent integral representation:
+\[X(t) = x_0 + \int_0^t \!a(X(s),s)\,\mathrm{d}s.\]
+In many theoretical and practical problems, we may want to include "randomness" (or "white noise") into the above equation.
+However the noise-term may be nowhere differentiable in the usual definition. Therefore it is reasonable to consider only the integral representation of such equations and to include the noise-term as \emph{stochastic integral}.
+We will follow the It\^o stochastic integration theory in order to define so-called \emph{stochastic differential equations}. Consider the following stochastic integral equation:
+\[X_t = x_0 + \int_0^t \!a(X_s,s)\,\mathrm{d}s + \int_0^t \!b(X_s,s)\,\mathrm{d}W_{s},\quad t\in [0,T],\]
+where we have given a probability space \(\left( \Omega , \mathcal{F}, P\right)\). Equality is P-a.s, \(x_0\) is a possible random initial value and the noise-term is included through the second integral, where the integrator is the \emph{Wiener process}. Now the deterministic (Riemann-) integral can be understood as drift coefficient and the stochastic integral as diffusion (or volatility) coefficient. We want to find a stochastic process \(X_t\) which satisfies the equation and call it the \emph{solution process}.
+We will say that the above equation is the mathematical interpretation of the stochastic differential equation which is given in symbolical (differential) form:
+\[\mathrm{d}X_t = a(X_t,t)\mathrm{d}t + b(X_t,t)\mathrm{d}W_t.\]
+
+In chapter \ref{ch:Foundations} we will define the Wiener process (also called \emph{Brownian motion}) and its discretization.
+And in chapter \ref{ch:ItoCalc} we will discuss the classical theory of stochastic integration w.r.t the Wiener process.
+In section \ref{itolemma} we will present the fundamental theorem of stochastic calculus, the \emph{lemma of It\^o}, and give some examples. We will then use this important result in \ref{stochasticTaylor} in order to construct so-called 
+\emph{stochastic Taylor expansions} which can be seen as a generalization of the classical result to certain stochastic processes (which we will call \emph{It\^o-processes}).
+\linebreak
+
+In chapter \ref{ch:SDE} we will finally define stochastic differential equations and discuss conditions under which the solution exists and whether it is unique (almost surely).
+We will discuss 2 basic examples of stochastic differential equations for which closed-form solutions are known and give the calculations. The \emph{geometric Brownian motion} and the \emph{Ornstein-Uhlenbeck process}.
+\linebreak
+
+Stochastic differential equations with a known explicit solution are the exception from the rule. Thus it is important (similar to deterministic differential equations) to have numerical algorithms for approximative solutions.
+In chapter \ref{ch:Num} we will truncate our stochastic Taylor expansions, in order to construct approximative schemes for stochastic differential equations. These are also called \emph{time-discrete schemes} since we give the approximative values on some discrete points of the time interval [0,T].
+We will consider strongly converging schemes. These are numerical algorithms which give path-wise approximations of the true solution.
+We will discuss the so-called \emph{Euler-Maruyama} and the \emph{Milstein} scheme and study their convergence properties. We will prove that the Euler scheme is converging (in \(L_2[\Omega]\)) to the true solution with order of convergence 0.5, and the Milstein scheme with order 1.0 respectively under some global Lipschitz-conditions on the coefficients.
+\linebreak
+
+In section \ref{results} we will illustrate our numerical schemes on the considered stochastic differential equations and give Monte-Carlo estimates for the convergence orders. We will then end the thesis with a comparison of the analytical and the empirical results of the convergence orders for both schemes.

@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+\usetheme{Warsaw}
+
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage{amsmath}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{subcaption} %Multiple figures, 1 caption
+
+%%TITLE PAGE
+\title[Numerical methods for SDE's]{Strong Schemes for the Numerical Solution of Stochastic Differential Equations (SDE's) } % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Amr Umeri} 
+\institute[University of Bern] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+University of Bern \\ % Your institution for the title page
+\medskip
+\textit{amr.umeri@outlook.com} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+\input{Content/slides}
+
+\end{document} 
+
+
+
+
+
