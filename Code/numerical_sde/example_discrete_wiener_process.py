@@ -9,6 +9,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from numerical_sde_solver import NumericalSDE
+from utils import create_timegrid
 
 #############################################################################
 # Figure 2.1: Generating m paths (samples) of a standard Wiener process on the time intervall [0,T]
@@ -21,7 +22,7 @@ n = 2**8
 numerical_sde = NumericalSDE(n)
 
 # Time discretization of [0,T] with in total n+1 grid points (including starting value 0)
-t = numerical_sde.create_timegrid(n)
+t = create_timegrid(numerical_sde.T_one, n)
 
 # Generate m discretized Wiener processes
 m = 10
@@ -63,9 +64,9 @@ t_2 = numerical_sde.timegrid
 
 
 # Plot the discretized Wiener process and refinements
-plt.plot(t_0, wiener_0,'k', linewidth=0.8)
-plt.plot(t_1, wiener_refined,'r', linewidth=0.5, c='b')
-plt.plot(t_2, wiener_refined_refined,'r', linewidth=0.5, c='b')
+plt.plot(t_0, wiener_0, 'k', linewidth=0.8)
+plt.plot(t_1, wiener_refined, linewidth=0.5, c='b')
+plt.plot(t_2, wiener_refined_refined, linewidth=0.5, c='b')
 
 plt.xlabel('t', fontsize=16)
 plt.ylabel('x', fontsize=16)
@@ -89,7 +90,7 @@ t = numerical_sde.timegrid
 
 # Create step function
 w_step = np.zeros(n_step+1)
-t_step = np.linspace(0.0, numerical_sde.T, n_step+1)
+t_step = np.linspace(0.0, numerical_sde.T_one, n_step+1)
 
 
 for k in range(0,n_step):
@@ -98,7 +99,7 @@ w_step[n_step] = w[n-1]
 
 # Plot a sample of the Wiener process and a corresponding step function
 plt.plot(t, w,'k', linewidth=0.6)
-plt.step(t_step, w_step,'k', linewidth=1,color='b', where='post')
+plt.step(t_step, w_step, linewidth=1, color='b', where='post')
 
 plt.xlabel('t', fontsize=16)
 plt.ylabel('x', fontsize=16)
