@@ -4,16 +4,19 @@
 # Figure 4.2: Generating m paths of the Ornstein-Uhlenbeck process (OU) on the time intervall [0,T]
 #############################################################################
 
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, parent_dir)
+
 import numpy as np
-import numpy.matlib
 import matplotlib.pyplot as plt
-from numerical_sde_solver import NumericalSDE
-from utils import create_timegrid
+from numerical_sde_lib.numerical_sde_solver import NumericalSDE
 
 # Initialize parameters for the discretization and the NumericalSDE class
 n = 2**8
 numerical_sde = NumericalSDE(n)
-t = create_timegrid(numerical_sde.T_one, n)
+t = numerical_sde.timegrid
 # Initialize number of sample paths
 m = 7
 

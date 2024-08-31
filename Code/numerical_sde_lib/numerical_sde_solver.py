@@ -1,7 +1,7 @@
 from math import sqrt
 import numpy as np
 from scipy.stats import norm
-from utils import create_timegrid
+from numerical_sde_lib.utils import create_timegrid
 
 
 class NumericalSDE: 
@@ -84,19 +84,21 @@ class NumericalSDE:
         self.timegrid = create_timegrid(self.T_one, 2*n)
 
 
-    def resample_wiener(self):
+    def resample_wiener(self, n=None):
         """
         Generates a new sample for the discretized Wiener process starting with 0 at time t=0.
         """
-        w = self.wiener
-        n = w.size-1
+        if n==None:
+            w = self.wiener
+            n = w.size-1
         self.wiener = self.discretize_wiener(n)
+        self.timegrid = create_timegrid(self.T_one, n)
 
 
     def solve_sde(self, func_mu, func_sigma, x0, method='milstein'):
         """
         Solves the SDE using the specified method.
-        Returns the approximated values on the time-grid and the time-grid itself.
+        Returns the approximated values on the time-grid.
 
         Parameters:
         - func_mu: The function defining the drift term of the SDE, of the form a(x).
@@ -110,7 +112,7 @@ class NumericalSDE:
         self.x0 = x0
 
         if method in self.method_map:
-            self.solution = (self.timegrid, self.method_map[method]())
+            self.solution = self.method_map[method]()
         else:
             raise ValueError(f"Unknown method: {method}")
         

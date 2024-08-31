@@ -6,10 +6,15 @@
 # Figure 3.1: Plots the Wiener process and its corresponding step process
 #############################################################################
 
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, parent_dir)
+
+
 import numpy as np
 import matplotlib.pyplot as plt
-from numerical_sde_solver import NumericalSDE
-from utils import create_timegrid
+from numerical_sde_lib.numerical_sde_solver import NumericalSDE
 
 #############################################################################
 # Figure 2.1: Generating m paths (samples) of a standard Wiener process on the time intervall [0,T]
@@ -22,7 +27,7 @@ n = 2**8
 numerical_sde = NumericalSDE(n)
 
 # Time discretization of [0,T] with in total n+1 grid points (including starting value 0)
-t = create_timegrid(numerical_sde.T_one, n)
+t = numerical_sde.timegrid
 
 # Generate m discretized Wiener processes
 m = 10
