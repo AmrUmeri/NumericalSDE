@@ -1,8 +1,12 @@
 # Numerical Methods for SDE
 
-The package in `.\Code\numerical_sde_lib` provides various (time-discrete) numerical methods for solving time-independent, 1-dimensional stochastic differential equations (SDEs). The package can easily be adjusted to also allow multi-dimensional and time-dependent SDE.
+This is the repository containing the source code for the Python Package that has been developed for the bachelor thesis *Strong Schemes for the Numerical Solution of Stochastic Differential Equations* (2017). The thesis itself can be found under `.\Bachelor_Thesis.pdf`
+
+The package in `.\Code\numerical_sde_lib` provides various (time-discrete) numerical methods for the pathwise approximation of time-independent, 1-dimensional stochastic differential equations (SDEs) with Lipschitz coefficients. The package can easily be adjusted to also allow multi-dimensional and time-dependent SDE.
 
 Under `.\Code\examples` sample code can be found which shows how to work with the modules associated to the package.
+
+under `.\Code\monte_carlo_estimation_convergence_order` Monte-Carlo estimates for the convergence order of the numerical methods are provided (see thesis for explanations). In particular the refinement (or "multi-resolution") algorithm for the Wiener process is iteratively applied to get approximations for the considered SDE on a finer and finer time-grid. 
 
 
 ## Content of `numerical_sde_lib`
