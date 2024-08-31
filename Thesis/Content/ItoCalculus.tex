@@ -71,27 +71,24 @@ And we can define:
 Additionaly, the It\^o-isometry holds also in \(\mathcal{C}\).
 \end{lemma}
 
-Sketch of the construction:\\
-The idea is to show that \(\mathcal{E}\) is dense in \(\mathcal{C}\) w.r.t the norm \(\|\cdot\|_{L^2[0,T]}\) using an approximation procedure. This is technical, see \cite{Oksendal} for the details.
-This means:\\
-\(\exists\) sequence \((\xi_t^n)_{n\!\in\!\mathbb{N}}\in\mathcal{E} \text{ s.t. } \|X_t-\xi_t^n\|_{L^2[0,T]}\rightarrow 0 \text{ as } n\rightarrow\infty\:\:\forall X_t\in\mathcal{C}\).\\
-Since \( L^2[0,T]\) is complete, \(({\xi_t^n})_{n\!\in\!\mathbb{N}}\) is a Cauchy-sequence in this space. Using the It\^o-isometry, we then have:\\
-\(\|\xi_t^n-\xi_t^m\|_{L^2[0,T]} = \|\int_{0}^{T}\xi_t^n\mathrm{d}W_t-\int_{0}^{T}\xi_t^m\mathrm{d}W_t\|_{L^2[\Omega]}\rightarrow 0 \text{ as } n,m\rightarrow\infty\). \\
+The idea of the construction is to show that \(\mathcal{E}\) is dense in \(\mathcal{C}\) w.r.t the norm \(\|\cdot\|_{L^2[0,T]}\) using an approximation procedure, see \cite{Oksendal} for the details.
+This means there exists a sequence \((\xi_t^n)_{n\!\in\!\mathbb{N}}\in\mathcal{E} \text{ s.t. } \|X_t-\xi_t^n\|_{L^2[0,T]}\rightarrow 0 \text{ as } n\rightarrow\infty\:\:\forall\: X_t\in\mathcal{C}\).
+Since \( L^2[0,T]\) is complete, \(({\xi_t^n})_{n\!\in\!\mathbb{N}}\) is a Cauchy-sequence in this space. Using the It\^o-isometry, we then have:
+\[\|\xi_t^n-\xi_t^m\|_{L^2[0,T]} = \|\int_{0}^{T}\xi_t^n\mathrm{d}W_t-\int_{0}^{T}\xi_t^m\mathrm{d}W_t\|_{L^2[\Omega]}\rightarrow 0 \text{ as } n,m\rightarrow\infty.\]
 Hence \(({\int_{0}^{T}\xi_t^n}\mathrm{d}W_t)_{n\!\in\!\mathbb{N}}\) is a Cauchy-sequence in \(L^2[\Omega]\). It is well known that this space is complete\footnote{\(L^2[\Omega]\) is the usual space of square-integrable random variables on
 \(\left( \Omega , \mathcal{F}, P\right)\).}. 
-Thus, it makes sense to define:\\
-\(\int_0^T\! X_t\,\mathrm{d}W_{t} \coloneqq\lim_{n\to\infty}\int_0^T\! \xi_t^n\,\mathrm{d}W_{t} \quad(\text{in }L^2[\Omega])\) as an element in \(L^2[\Omega]\).
+Thus, it makes sense to define:
+\[\int_0^T\! X_t\,\mathrm{d}W_{t} \coloneqq\lim_{n\to\infty}\int_0^T\! \xi_t^n\,\mathrm{d}W_{t} \quad(\text{in }L^2[\Omega])\]
+as an element in \(L^2[\Omega]\).
 
  
 We still need to clarify why we choose It\^o over Stratonovich. As can be seen, the definition due to It\^o simplifies our calculations and enables us to define the stochastic integral in a straightforward way through the isometry. The isometry does not hold in the Stratonovich calculus. Additionaly we are able to identify the It\^o stochastic integral as a martingale\footnote{See \cite{Oksendal} for the interpretation of It\^o stochastic integrals as martingales. The expected value of the It\^o stochastic integral is always 0 and the It\^o stochastic integral can be defined as adapted stochastic process.}.
-This is the main reason why we choose It\^o over Stratonovich.
-However martingales will not be discussed in this thesis.
 
 
 \section{Lemma of It\^o}
 \label{itolemma}
-The lemma of It\^o is an important result. It enables us to evaluate stochastic integrals without using the definition as in section \ref{lemma:StochInt}. 
-The idea of the lemma is the following: Given a stochastic process \(X_t\) and its representation as stochastic integral equation, we may ask, what is the representation of \(u(X_t)\) where u:\(\mathbb{R}\to\mathbb{R}\) is a smooth map? 
+The lemma of It\^o enables us to evaluate stochastic integrals without using the definition as in section \ref{lemma:StochInt}. 
+Given a stochastic process \(X_t\) and its representation as stochastic integral equation, we may ask, what is the representation of \(u(X_t)\) where u:\(\mathbb{R}\to\mathbb{R}\) is a smooth map? 
 We will present the lemma of It\^o in 3 cases: In the first case, \(X_t=W_t\) and we are interested in \(u(W_t)\). Then we will consider more general stochastic processes \(X_t\). Finally we will allow the mapping u:\(\mathbb{R}\times[0,T]\to\mathbb{R}\) to depend on the paramter t.
 \begin{definition}[It\^o process]
 \label{Itoprocess}

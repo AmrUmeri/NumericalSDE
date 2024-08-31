@@ -1,3 +1,20 @@
+#############################################################################
+# Main Module: Numerical Methods for (time-independent, 1-dimensional) SDE
+#
+# This package can be:
+# - Imported into other scripts.
+# - Installed locally via pip.
+#
+# Features include:
+# - Discretization of the Wiener process
+# - Refinement algorithm for the Wiener process (see thesis for details)
+# - Numerical methods:
+#   - Euler-Maruyama
+#   - Milstein
+#   - Wagner-Platen
+#############################################################################
+
+
 from math import sqrt
 import numpy as np
 from scipy.stats import norm
