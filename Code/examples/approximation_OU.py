@@ -1,66 +1,66 @@
 #############################################################################
-###Plots the true solution and the approximation on n (and 2*n) time-points for the
-###Ornstein-Uhlenbeck process
-###Euler-Maruyama, Milstein (optional: Wagner-Platen)
-###SDE_ApproximationOU.py
-###Python 2.7
+# Plots the true solution and the approximation on n (and 2*n) time-points for the
+# Ornstein-Uhlenbeck process
 #############################################################################
+
+import sys
+import os
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, parent_dir)
 
 import numpy as np
 import matplotlib.pylab as plt
-from NumericalSDE import *
+from numerical_sde_lib.numerical_sde_solver import NumericalSDE
 
-#################################################
-### Ornstein-Uhlenbeck process (OU)
-### dXt = a(Xt)dt + b(Xt)dWt
-### X0 = x0
-### a(x) = -beta*x, b(x) = sigma
-### beta, sigma positive constants
-### True solution:
-###
-#################################################
-#Parameter
+
+# Parameter
 sigma = 1.5
 beta = 1.0
-#functions a, b
+
 def a(x):
     return -beta*x
 def b(x):
     return sigma
-#derivativs of a, b
-def a_dv(x):
-    return -beta
-def b_dv(x):
-    return 0
-def a_dvdv(x):
-    return 0
-def b_dvdv(x):
-    return 0
-#starting value x0
+
 x0 = 1
+
 #################################################
 # Number of steps.
-n = 32
-#Wiener process w, discretization of [0,T] t
-w = wiener(n)
-t = timegrid(n)
-#Finer versions(using refinmenent)
-w2 = refineWiener(w)
-t2 = timegrid(2*n)
+n = 200
+
+# Initialize NumericalSDE class
+numerical_sde = NumericalSDE(n)
+
+# Wiener process, discretization of [0,T]
+w = np.copy(numerical_sde.wiener)
+t = np.copy(numerical_sde.timegrid)
+
 #################################################
 ###############Numerical solutions###############
 #################################################
-#Numerical solution: Euler-scheme
-Yt_euler = sde_euler(x0,a,b,w)
-Yt2_euler = sde_euler(x0,a,b,w2)
-#Numerical solution: Milstein-scheme
-Yt_milstein = sde_milstein(x0, a, b, b_dv, w)
-Yt2_milstein = sde_milstein(x0, a, b, b_dv, w2)
-#Numerical solution: Wagner-Platen-scheme
-Yt_wagnerplaten = sde_wagnerplaten(x0, a, b, a_dv, b_dv, a_dvdv, b_dvdv, w)
-Yt2_wagnerplaten = sde_wagnerplaten(x0, a, b, a_dv, b_dv, a_dvdv, b_dvdv, w2)
 
-#Analytical solution (Ornstein-Uhlenbeck process) (adapt this for other SDEs.)
+# Numerical solution on n grid-points
+numerical_sde.solve_sde(a,b,x0,'euler-maruyama')
+Yt_euler = numerical_sde.solution
+numerical_sde.solve_sde(a,b,x0,'milstein')
+Yt_milstein = numerical_sde.solution
+numerical_sde.solve_sde(a,b,x0,'wagner-platen')
+Yt_wagnerplaten = numerical_sde.solution
+
+# Finer versions (using refinmenent algorithm)
+numerical_sde.refine_wiener()
+w2 = np.copy(numerical_sde.wiener)
+t2 = np.copy(numerical_sde.timegrid)
+
+# Numerical solution on 2*n grid-points
+numerical_sde.solve_sde(a,b,x0,'euler-maruyama')
+Yt2_euler = numerical_sde.solution
+numerical_sde.solve_sde(a,b,x0,'milstein')
+Yt2_milstein = numerical_sde.solution
+numerical_sde.solve_sde(a,b,x0,'wagner-platen')
+Yt2_wagnerplaten = numerical_sde.solution
+
+# Analytical solution (Ornstein-Uhlenbeck process)
 temp = np.zeros(n+1)
 Xt=np.zeros(n+1)
 stochInt = np.zeros(n+1)
@@ -82,9 +82,6 @@ for k in range(0,n):
 
     Xt[k+1] = Xt[0]*np.exp((-beta)*(t[k+1])) + sigma*stochInt[k+1]
 
-
-
-    
 for k in range(0,2*n):
     #Xt2[k+1] = Xt[0]*np.exp((mu-sigma**2/2)*(t2[k+1]) + sigma*w2[k+1])
     for j in range(0,k):
@@ -92,7 +89,8 @@ for k in range(0,2*n):
     stochInt2[k+1] = np.sum(temp2)
 
     Xt2[k+1] = Xt2[0]*np.exp((-beta)*(t2[k+1])) + sigma*stochInt2[k+1]
-#plot
+
+# Plot
 plt.figure(1)
 plt.scatter(t, Yt_euler, 1, c='b', label="Euler-method")
 plt.scatter(t, Xt, 1, c='k', label="Analytical solution")
